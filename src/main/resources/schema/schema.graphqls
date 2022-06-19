@@ -1,0 +1,52 @@
+type Query {
+    shows(titleFilter: String): [Show]
+}
+
+type Show {
+    uuid: ID!
+    title: String!
+    category: String!
+    release_date: DateTime!
+    studio: Studio
+    shoot: [Shoot]
+    credit: [Credit]
+}
+
+type Studio {
+    uuid: ID!
+    name: String!
+    show: [Show]
+}
+
+type Shoot {
+    uuid: ID!
+    description: String
+    country: String!
+    city: String!
+    start_date: DateTime!
+    end_date: DateTime
+    show: Show!
+}
+
+type Talent {
+    uuid: ID!
+    first_name: String!
+    last_name: String!
+    job_title: String!
+    country: String!
+    city: String!
+    credit: [Credit]
+}
+
+type Credit {
+    role: String!
+    show: Show!
+    talent: Talent!
+}
+
+scalar DateTime
+
+schema {
+    query: Query
+}
+
